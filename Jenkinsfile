@@ -1,10 +1,9 @@
-pipeline
-{
+pipeline {
     agent any
     stages {
-        stage (git) {
+        stage (scm) {
             steps {
-                git branch: 'main', url: 'https://github.com/vamsibyramala/live01.git'
+                git branch: 'main', url: 'https://github.com/vinodbangaru/live01.git'
             }
         }
         stage (maven) {
@@ -14,7 +13,7 @@ pipeline
         }
         stage (deploy) {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://43.205.229.18:8081/')], contextPath: 'ROOT', war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://43.205.229.18:8081/')], contextPath: 'vinod', war: '**/*.war'
             }
         }
     }
