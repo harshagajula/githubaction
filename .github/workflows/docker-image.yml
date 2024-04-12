@@ -38,5 +38,17 @@ jobs:
       
     - name: Install SSH
       run: sudo apt-get install openssh-client
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Deploy to EC2 instance
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ec2-user@34.229.134.195 << 'EOF'
+          docker pull raghava017/test:latest
+          docker run -d --name test -p 80:80 raghava017/test:latest
+        EOF
       
    
