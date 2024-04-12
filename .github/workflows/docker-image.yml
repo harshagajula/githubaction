@@ -15,6 +15,10 @@ jobs:
       with:
         java-version: '11'
         distribution: 'zulu'
+        maven-version: 'default'
+
+    - name: Build with Maven
+      run: mvn clean package
         
     - name: Checkout code
       uses: actions/checkout@v2
